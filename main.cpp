@@ -2,6 +2,7 @@
 //  DO NOT MODIFY NEXT LINE
 //------------------------------
 #include "catch.hpp"
+#include <iostream>
 //------------------------------
 
 // Use this enum class for indicating the lat/long direction
@@ -9,6 +10,81 @@ enum class Compass {N, S, W, E};
 
 // Write your code here
 class GPS {
+    private: 
+        double latitude;
+        Compass latitudeDirection;
+        double longitude;
+        Compass longitudeDirection;
+
+    public:
+        GPS() {
+            latitude = 0.0;
+            longitude = 0.0;
+            latitudeDirection = Compass::N;
+            longitudeDirection = Compass::W;
+        }
+    
+    GPS(double lat, double lon) {
+        if (lat > 90.0 || lat < 0.0 ) {
+            latitude = 0.0;
+        }
+        else {
+            latitude = lat;
+        }
+
+        if (lon > 180.0 || lon < 0.0) {
+            longitude = 0.0;
+        }
+        else {
+            longitude = lon;
+        }
+        latitudeDirection = Compass::N;
+        longitudeDirection = Compass::W;
+    }
+
+    GPS(double lat, Compass latDir, double lon, Compass lonDir) {
+        if (lat > 90.0 || lat < 0.0 ) {
+            latitude = 0.0;
+        }
+        else {
+            latitude = lat;
+        }
+
+        if (lon > 180.0 || lon < 0.0) {
+            longitude = 0.0;
+        }
+        else {
+            longitude = lon;
+        }
+        if (latDir == Compass::N || latDir == Compass::S) {
+            latitudeDirection = latDir;
+        }
+        else {
+            latitudeDirection = Compass::N;
+        }
+        if(lonDir == Compass::W || lonDir == Compass::E) {
+            longitudeDirection = lonDir;
+        }
+        else {
+            longitudeDirection = Compass::W;
+        }
+    }
+
+    double getLatitude() {
+        return latitude;
+    }
+
+    double getLongitude() {
+        return longitude;
+    }
+
+    Compass getLatitudeDirection() {
+        return latitudeDirection;
+    }
+
+    Compass getLongitudeDirection() {
+        return longitudeDirection;
+    }
 
 };
 
